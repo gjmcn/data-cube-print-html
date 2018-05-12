@@ -48,9 +48,9 @@
     array: x => 'array (entries: ' + x.length + ')',
     date: x => ('' + x).replace(/\s*\([^\)]*\)/, ''),
     other: x => truncate('' + x, maxStr),
-    index: x => '(' + x + ')',
+    index: x => x,
     key: x => truncate('' + x, maxStr),
-    label: x => x,
+    label: x => x //'(' + x + ')'
   };
   
   //entry format function
@@ -174,14 +174,14 @@
   
     //label elements
     let rl, cl, pl;
-    if (label[0]) rl = `<td class="row-label" rowspan="${nr}">${fmt.label(_l[0])}</td>`;
-    if (label[1]) cl = `<td class="col-label" colspan="${nc}">${fmt.label(_l[1])}</td>`;
-    if (label[2]) pl = `<span class="page-label">${fmt.label(_l[2])}</span>`;
+    if (label[0]) rl = `<td class="label row-label" rowspan="${nr}">${fmt.label(_l[0])}</td>`;
+    if (label[1]) cl = `<td class="label col-label" colspan="${nc}">${fmt.label(_l[1])}</td>`;
+    if (label[2]) pl = `<span class="label page-label">${fmt.label(_l[2])}</span>`;
 
     //index/key elements
     let [rik, cik, pik] = indexKey.map( (ik,d) => {
       if (ik) {
-        const cls = `${shortDimName[d]}-ik`;
+        const cls = `ik ${shortDimName[d]}-ik`;
         const tg = d === 2 ? 'span' : 'td';
         if (_k[d]) return keyStr[d].map(ky => elm(tg, fmt.key(ky), cls));
         else {
@@ -202,7 +202,7 @@
       : '';
     
     //pages
-    let str = '';
+    let str = '';    
     for (let p=0; p<np; p++) {
       str += '<table class="page-table"';
       if (table) str += ` data-table="${_k[2] ? keyStr[2][p] : p}"`;
@@ -237,7 +237,7 @@
           let [ent,typ] = fmtEntry(this[r + nr*c + nr*nc*p]);
           str += td(
             ent,
-            type ? typ : undefined,
+            'entry' + (type ? ` ${typ}` : ''),
             entry ? 
               [
                 keyStr[0] ? keyStr[0][r] : r,
