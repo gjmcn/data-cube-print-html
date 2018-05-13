@@ -80,10 +80,10 @@
     return [fmt.other(x), 'other'];
   };
     
-  //array/cube, str[, *, str, bool] => array/cube/DOM-elmt
-  //create div, set its innerHTML to s, print and return
-  //based on the options to, id and chain (see print)
-  const displayReturn = (x, s, to, id, chain) => {
+  //str[, *, str] -> HTML elment
+  //create div and set its innerHTML to s; to and id are options
+  //from print/info
+  const display = (s, to, id) => {
     const dv = document.createElement('div');
     if (id !== undefined) dv.id = id;
     dv.innerHTML = s;
@@ -95,42 +95,13 @@
       else if (to instanceof Element) to.insertBefore(dv,null);
       else if (to[0] instanceof Element) to[0].insertBefore(dv,null);
     }
-    return chain ? x : dv;
-  }
+    return dv;
+  };
 
   
   //--------------- print cube or standard array ---------------//
   
-  //MOVE MOST DETAILS TO README
-  //[object] -> cube/str
-  //options object:
-  //  -to:  
-  //    -falsy (default): prints nothing
-  //    -string: passes string to document.querySelector and appends
-  //     printed array/cube to selected element
-  //    -otherwise: if is an element, appends to it; else if property
-  //     at index 0 is an elmt, appends to it
-  //  -chain: if truthy, returns the array/cube; if falsy (default) returns
-  //    the wrapper div containing the printed array/cube
-  //  -label: array/singleton, label of a dimension is printed if the
-  //   corresponding entry is truthy (and the label exists), a  singleton
-  //   is broadcast. Default: labels are printed if they exist
-  //  -indexKey: array/singleton, the indices/keys of a dimension are
-  //   printed if the corresponding entry is truthy, singleton is broadcast.
-  //   Default: row and col indices/keys are printed; page inds/keys are
-  //   printed if there are multiple pages or there are page keys or there
-  //   is a page label that is being printed
-  //  -type: if truthy, <td>s representing entries have a class
-  //   indicating their type. Default: true
-  //  -entryAttr: if truthy, <td>s representing entries have attributes
-  //   data-row, data-col, data-page; values are indices/keys (keys
-  //   are converted to strings, but not formatted). Default: false.
-  //  -tableAttr: if truthy, <table> for each page has data-table attribute
-  //   with the page index/key as the value (keys are converted to strings,
-  //   but not formatted). Default: false
-  //  -id: id for wrapper div. Default: no id used
-  //Note: an array is printed as a cube, but the array itself is NOT
-  //converted to a cube.
+  //[object] -> HTML elment, print array/cube
   addArrayMethod('print', function(ops) {
                  
     const shortDimName = ['row', 'col', 'page'];             
@@ -147,7 +118,7 @@
     //process options
     ops = def(assert.single(ops), {});
     if (typeof ops !== 'object') throw Error('object expected');
-    let {to, chain, label, indexKey, type, entryAttr, tableAttr, id} = ops;
+    let {to, label, indexKey, type, entryAttr, tableAttr, id} = ops;
     type = def(type, true);
     let indexKeySingle, labelSingle;
     //labels
@@ -170,7 +141,7 @@
     }
   
     //use info if empty or too many entries
-    if (this.length > fmt.maxPrint || this.length === 0) return this.info({to,chain,id});
+    if (this.length > fmt.maxPrint || this.length === 0) return this.info({to,id});
   
     //need some/all keys as strings if printing keys or if entryAttr/tableAttr is truthy
     const keyStr = indexKey.map( (ik,d) => {
@@ -271,19 +242,18 @@
     }
     
     //print and return
-    return displayReturn(this, str, to, id, chain);
+    return display(str, to, id);
   
   });
 
 
   //--------------- print info on cube or standard array ---------------//
   
-  //As in print, ops is an options object, but only the to,
-  //chain, and id properties are used.
+  //[object] -> HTML element, print info about array/cube
   addArrayMethod('info', function(ops) {
     ops = def(assert.single(ops), {});
     if (typeof ops !== 'object') throw Error('object expected');
-    let {to, chain, id} = ops;
+    let {to, id} = ops;
     let str = '<table class="info-table">';
     if (this._data_cube) {
       const keys = [];
@@ -303,7 +273,7 @@
          <tr><td>entries: ${this.length}</td></tr>
          </table>`;
     }
-    return displayReturn(this, str, to, id, chain);
+    return display(str, to, id);
   });
   
   
