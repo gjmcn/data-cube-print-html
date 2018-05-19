@@ -13,7 +13,7 @@ Print [DataCubes](https://github.com/gjmcn/data-cube) in HTML documents:
 
 Install: `npm install --save data-cube-print-console`
 
-The package uses the Universal Module Definition (UMD). It can be loaded in a  `<script>` tag in HTML or with an `import` statement in JavaScript. To load with `require`, use [Browserify](http://browserify.org/) or a similar tool.
+The package uses the Universal Module Definition (UMD). It can be loaded in a  `<script>` tag in HTML or with an `import` statement in JavaScript.
 
 The package adds two methods to `Array.prototype`:
 
@@ -25,7 +25,7 @@ These methods return an HTML containing the printed cube/array. This is useful w
 
 Notes:
 
-* The package exports a function that can be used to change how entries, keys and labels are formatted &mdash; see [Format Functions](#format) below. When a `<script>` tag is used to load the package, the exported function is assigned to the global variable `printFormat`.
+* The package exports a function that can be used to change how entries, keys and labels are formatted &mdash; see [Format Functions](#format) below. When a `<script>` tag is used to load the package, the exported function is assigned to the global variable `data_cube_format`.
 
 
 * `print` will generate the same HTML for the standard array `[5,6,7]` and the vector `[5,6,7].toCube()`. However, `print` and `info` do *not* convert a standard array to a cube like core DataCube methods do.
@@ -36,7 +36,7 @@ Notes:
 
 
 Property | Description
-|:--|:--|
+--- | ---
 `to` | If falsy (default), prints nothing; if a string, passes string to `document.querySelector` and appends printed array/cube to selected element; otherwise, if property value is an element, appends printed array/cube to it; otherwise, if property `0` is an elment, appends printed array/cube to it
 `label` | Array or singleton. The label of a dimension is printed if the corresponding entry is truthy (and the label exists). A singleton value is broadcast to all dimensions. Default: labels are printed if they exist.
 `indexKey` | Array or singleton. The indices/keys of a dimension are printed if the corresponding entry is truthy. A singleton value is broadcast to all dimensions. Default: row and col indices/keys are printed; page indices/keys are printed if there are multiple pages or there are page keys or there is a page label that is being printed.
@@ -47,7 +47,34 @@ Property | Description
 
 The `info` method also accepts an options argument, but only use the properties: `to` and `id`.
 
-### Classes and Attributes
+### Classes
+
+The following classes are added to elements of cubes/arrays printed with `print`:
+
+Class | Tag | Description
+--- | --- | ---
+`data-cube-wrap` | `<div>` | element returned by `print` and `info`
+`page-table` | `<table>` | page of the cube
+`page-caption` | `<caption>` | page caption
+`page-label` | `<span>` | page label, inside page caption
+`page-ik` | `<span>`| page index/key, inside page caption
+`col-label` | `<td>`| column label
+`col-ik` | `<td>`| column label 
+`row-label` | `<td>`| column index/key
+`row-ik` | `<td>`| row label
+`entry` | `<td>`| entry
+`top-left` | `<td>`| empty elment in top-left of page table
+
+When the `type` option is truthy, each entry `<td>` contains an additional class indicating its type. The possible classes are: `number`, `string`, `boolean`, `undefined`, `null`, `date`, `function`, `cube`, `array` and `other`.
+
+Note that some table elements may not exist. For example, if row indices/keys are not being printed (see the `indexKey` option), the HTML tables for each page will not contain the associated `<td>` elements.
+
+`info` HERE!!!!!!!!!!!!!!!!!!!!
+
+
+### Attributes
+
+
 
 <h3 name="format" href="#format">Format Functions</h3>
 
