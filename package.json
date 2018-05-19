@@ -1,10 +1,11 @@
 {
   "name": "data-cube-print-html",
   "version": "0.1.0",
-  "description": "",
-  "main": "print-html.js",
+  "description": "Print DataCubes in HTML documents.",
+  "main": "dist/print-html.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,13 @@
   "homepage": "https://github.com/gjmcn/data-cube-print-html#readme",
   "dependencies": {
     "data-cube-helper": "^0.1.0"
+  },
+  "devDependencies": {
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-uglify": "^3.0.0"
+  },
+  "peerDependencies": {
+    "data-cube": "^0.1.0"
   }
 }

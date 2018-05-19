@@ -12,7 +12,7 @@
   //  rcp: if truthy, the 3 entries are included as values of
   //       the attributes data-row, data-col and data-page
   const elm = (tag, val, cls, rcp) => {
-    s = `<${tag}`;
+    let s = `<${tag}`;
     if (cls) s += ` class="${cls}"`;
     if (rcp) s += ` data-row="${rcp[0]}" data-col="${
                     rcp[1]}" data-page="${rcp[2]}"`;

@@ -1,8 +1,7 @@
 {
   'use strict';
-  
-  require('data-cube');
-  const fmt = require('data-cube-print-html');
+    
+  const fmt = data_cube_format;
   
   //Standard array
   [7,8,9].print({to: '#array'});
