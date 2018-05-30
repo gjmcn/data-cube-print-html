@@ -11,7 +11,7 @@ Print [DataCubes](https://github.com/gjmcn/data-cube) in HTML documents:
 
 ## Usage
 
-Install: `npm install --save data-cube-print-console`
+Install: `npm install --save data-cube-print-html`
 
 The package uses the Universal Module Definition (UMD). It can be loaded in a  `<script>` tag in HTML or with an `import` statement in JavaScript.
 
