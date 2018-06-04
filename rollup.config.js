@@ -8,7 +8,7 @@ export default {
     extend: true,
     file: 'dist/print-html.js',
     format: 'umd',
-    name: 'data_cube_format'
+    name: 'setFormat'
   },
   plugins: [
     commonjs({
