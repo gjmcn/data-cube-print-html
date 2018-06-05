@@ -1,7 +1,5 @@
 {
   'use strict';
-    
-  const fmt = data_cube_format;
   
   //Standard array
   [7,8,9].print({to: '#array'});
@@ -100,7 +98,7 @@
   
   //Format row label, row keys, column indices, string
   //entries, date entries and number of decimal places:
-  fmt({
+  setFormat({
     dp: 2,
     date: d => d.getFullYear(),
     string: s => s.toUpperCase().slice(0,6),
@@ -111,7 +109,7 @@
   y.print({to: '#format'});
   
   //Reset formatting to default
-  fmt();
+  setFormat();
   y.print({to: '#reset'});
 
 }

@@ -16,7 +16,7 @@ These methods return a `<div>` containing the printed cube/array. Typically, we 
 
 **Notes:**
 
-* The package exports a function that can be used to change how entries, indices, keys and labels are formatted &mdash; see [Format Functions](#format). When a `<script>` tag is used to load the package, the exported function is assigned to the global variable `setFormat`.
+* The package exports a function that can be used to change how entries, indices, keys and labels are formatted &mdash; see [Format](#format). When a `<script>` tag is used to load the package, the exported function is assigned to the global variable `setFormat`.
 
 
 * `print` will generate the same HTML for the standard array `[5,6,7]` and the vector `[5,6,7].toCube()`. However, `print` and `info` do *not* convert a standard array to a cube like core DataCube methods do.
@@ -42,41 +42,39 @@ The `info` method also accepts an options argument, but only uses the properties
 
 `print` adds the following classes to the HTML elements that it creates:
 
-
-HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 Class | Tag | Description
 --- | --- | ---
 `data-cube-wrap` | `<div>` | `<div>` returned by `print` and `info`
 `page-table` | `<table>` | page
 `page-caption` | `<caption>` | page caption
-`label` | `<td>` or `<span>` | label
-`ik` | `<td>` or `<span>` | index/key
-`page-label` | `<span>` | page label, inside page caption
-`page-ik` | `<span>`| page index/key, inside page caption
-`col-label` | `<td>`| column label
-`col-ik` | `<td>`| column label 
-`row-label` | `<td>`| column index/key
-`row-ik` | `<td>`| row label
-`entry` | `<td>`| entry
 `top-left` | `<td>`| empty element in top-left of page table
+`label` | `<td>` or `<span>` | label
+`row-label` | `<td>`| row label
+`col-label` | `<td>`| column label
+`page-label` | `<span>` | page label (inside page caption)
+`ik` | `<td>` or `<span>` | index/key
+`row-ik` | `<td>`| row index/key
+`col-ik` | `<td>`| column index/key
+`page-ik` | `<span>`| page index/key (inside page caption)
+`entry` | `<td>`| entry
 
-When the `type` option is truthy, each entry `<td>` contains an additional class indicating its type. The possible classes are: `number`, `string`, `boolean`, `undefined`, `null`, `date`, `function`, `cube`, `array` and `other`.
+When the `type` option is truthy, each entry `<td>` contains an additional class; one of: `number`, `string`, `boolean`, `undefined`, `null`, `date`, `function`, `cube`, `array`, `other`.
 
 Notes:
 
 * Some table elements may not exist. For example, if row indices/keys are not being printed (see the `indexKey` option), the HTML tables for each page will not contain the associated `<td>` elements.
 
-* Use data attributes to get `<td>` elements for individual entries and or groups of entries &mdash; see the `entryAttr` and `tableAttr` options.
+* Use data attributes to get the `<td>` element for an individual entry or a group of entries &mdash; see the `entryAttr` and `tableAttr` options.
 
 The `<div>` returned by `info` also has the `data-cube-wrap` class. The `<table>` inside the `<div>` has the `info-table` class.
 
-<h3 name="format" href="#format">Format Functions</h3>
+<h3 name="format" href="#format">Format</h3>
 
-Every entry, index, key and label is passed through a format function. The package exports a single function that can be used to alter the default format functions. For example:
+Every printed entry, index, key and label is passed through a 'format function'. This package exports a single function that can be used to alter the default format functions. For example:
 
 ```js
-//assume package loaded with <script>, exported function is setFormat
+//if the package is loaded in a <script> tag, the
+//exported function is the global variable setFormat
 setFormat({
   number: x => '$' + Math.round(x),        //print numbers as dollars
   rowLabel: label => label.toUpperCase()   //print row labels in uppercase
@@ -92,7 +90,22 @@ Index | `rowIndex`, `colIndex`, `pageIndex`
 Key | `rowKey`, `colKey`, `pageKey`
 Label | `rowLabel`, `colLabel`, `pageLabel`
 
-Call the exported function with no arguments to reset all format functions to their defaults.
+**Notes:**
+
+* The default format functions *do not* escape HTML strings.
+
+* The default string format function *does* replace `\n` with `<br>`.
+
+There are also some high-level formatting properties that can be modified using the exported function:
+
+Name | Default | Description
+--- | ---: | ---
+`maxPrint` | `2000` | `print` does not print arrays/cubes with more than `maxPrint` entries; `info` is automatically called instead.
+`maxStr` | `40` | The default string format function truncates string entries to `maxStr` characters. Ellipses are added where truncation is required.
+`maxMag` | `1e6` | The default number format function uses scientific notation for entries with absolute value equal to or greater than `maxMag`.
+`dp` | `4` | The default number format function uses `dp` decimal places for non-integers and uses scientific notation for entries with absolute value less than 10<sup>-dp</sup>.
+
+Call the exported function with no arguments to reset all format functions and properties to their defaults.
 
 ## Other
 
