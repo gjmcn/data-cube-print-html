@@ -1,8 +1,7 @@
 {
   'use strict';
   
-  const helper = require('data-cube-helper');
-  const {addArrayMethod, polarize, assert, dimName, def} = helper;
+  const {addArrayMethod, polarize, assert, dimName, def} = Array.prototype._helper;
       
   
   //--------------- auxiliary ---------------//
