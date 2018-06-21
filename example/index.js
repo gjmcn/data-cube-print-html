@@ -49,13 +49,13 @@
   });
   
   //Single column and page
-  x.sc(null,'chem','Spring').print({to: '#rows'});
+  x.subcube(null,'chem','Spring').print({to: '#rows'});
   
   //Single row and page
-  x.sc('Cath',null,'Spring').print({to: '#columns'});
+  x.subcube('Cath',null,'Spring').print({to: '#columns'});
   
   //Single row and column
-  x.sc('Cath','chem').print({to: '#pages'});
+  x.subcube('Cath','chem').print({to: '#pages'});
   
   //Highlight Bob's results
   x.print({
