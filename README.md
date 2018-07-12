@@ -1,4 +1,4 @@
-Print [DataCubes](https://github.com/gjmcn/data-cube) in HTML documents &mdash; [example](URL WHEN DONE!!).
+Print [Data-Cubes](https://github.com/gjmcn/data-cube) in HTML documents &mdash; [example](URL WHEN DONE!!).
 
 ## Usage
 
@@ -19,7 +19,7 @@ These methods return a `<div>` containing the printed cube/array. Typically, we 
 * The package exports a function that can be used to change how entries, indices, keys and labels are formatted &mdash; see [Format](#format). When a `<script>` tag is used to load the package, the exported function is assigned to the global variable `setFormat`.
 
 
-* `print` will generate the same HTML for the standard array `[5,6,7]` and the vector `[5,6,7].toCube()`. However, `print` and `info` do *not* convert a standard array to a cube like core DataCube methods do.
+* `print` will generate the same HTML for the standard array `[5,6,7]` and the vector `[5,6,7].toCube()`. However, `print` and `info` do *not* convert a standard array to a cube like core Data-Cube methods do.
 
 ### Options Argument
 
