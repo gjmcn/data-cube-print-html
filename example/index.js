@@ -18,7 +18,7 @@
   
   //Exam results
   const x = [3,4,2].rand(100)
-    .$key(['Alice','Bob','Cath'])
+    .$key(0,['Alice','Bob','Cath'])
     .$key(1,['math','biol','chem','phys'])
     .$key(2,['Autumn','Spring'])
     .$label(0,'Student')
@@ -92,7 +92,7 @@
     {a:5, b:6},
     new Map([ ['a',4], ['b',5] ]),
     document.getElementById('results')
-  ].$shape(5).$label('row label').$key(['a','b','c','d','e']);  
+  ].$shape(5).$label(0,'row label').$key(0,['a','b','c','d','e']);  
   
   y.print({to: '#types'});
   
