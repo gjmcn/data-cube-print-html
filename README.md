@@ -66,7 +66,7 @@ Notes:
 
 The `<div>` returned by `info` also has the `data-cube-wrap` class. The `<table>` inside the `<div>` has the `info-table` class.
 
-<h3 name="format" href="#format">Format</h3>
+<h2 name="format" href="#format">Format</h2>
 
 Every printed entry, index, key and label is passed through a 'format function'. This package exports a single function that can be used to alter the default format functions. For example:
 
