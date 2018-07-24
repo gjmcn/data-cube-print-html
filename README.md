@@ -4,8 +4,6 @@ Print [Data-Cubes](https://github.com/gjmcn/data-cube) in HTML documents &mdash;
 
 Install: `npm install --save data-cube-print-html`
 
-The package uses the Universal Module Definition (UMD) so can be loaded in a  `<script>` tag or imported with JavaScript.
-
 The package adds two methods to `Array.prototype`:
 
 * `print`: print a cube (or a standard array)
@@ -21,7 +19,7 @@ These methods return a `<div>` containing the printed cube/array. Typically, we 
 
 * `print` will generate the same HTML for the standard array `[5,6,7]` and the vector `[5,6,7].toCube()`. However, `print` and `info` do *not* convert a standard array to a cube like core Data-Cube methods do.
 
-### Options Argument
+## Options Argument
 
 `print` takes a single 'options' object as an argument. The object can include the properties:
 
@@ -38,7 +36,7 @@ Property | Description
 
 The `info` method also accepts an options argument, but only uses the properties `to` and `id`.
 
-### Classes
+## Classes
 
 `print` adds the following classes to the HTML elements that it creates:
 
@@ -106,7 +104,3 @@ Name | Default | Description
 `dp` | `4` | The default number format function uses `dp` decimal places for non-integers and uses scientific notation for entries with absolute value less than 10<sup>-dp</sup>.
 
 Call the exported function with no arguments to reset all format functions and properties to their defaults.
-
-## Other
-
-* use the package [data-cube-print-console](https://github.com/gjmcn/data-cube-print-console) to print cubes in the terminal
