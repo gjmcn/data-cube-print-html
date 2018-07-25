@@ -1,6 +1,6 @@
 {
   "name": "@gjmcn/data-cube-print-html",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Print Data-Cubes in HTML documents.",
   "main": "dist/print-html.js",
   "scripts": {
