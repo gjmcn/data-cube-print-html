@@ -2,7 +2,7 @@ Print [Data-Cubes](https://github.com/gjmcn/data-cube) in HTML documents &mdash;
 
 ## Usage
 
-Install: `npm install --save data-cube-print-html`
+Install: `npm install --save @gjmcn/data-cube-print-html`
 
 The package adds two methods to `Array.prototype`:
 
