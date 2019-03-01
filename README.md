@@ -1,4 +1,4 @@
-Print [Data-Cubes](https://github.com/gjmcn/data-cube) in HTML documents &mdash; [example](URL WHEN DONE!!).
+Print [Data-Cubes](https://github.com/gjmcn/data-cube) in HTML documents.
 
 ## Usage
 
