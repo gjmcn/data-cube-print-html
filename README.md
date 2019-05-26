@@ -1,10 +1,8 @@
-Print [Data-Cubes](https://github.com/gjmcn/data-cube) in HTML documents.
+Print [Data-Cubes](https://gjmcn.github.io/data-cube) in HTML documents.
 
-## Usage
+See `docs/index.html` for [examples](https://gjmcn.github.io/data-cube-print-html).
 
-Install: `npm install --save @gjmcn/data-cube-print-html`
-
-The package adds two methods to `Array.prototype`:
+The module adds two methods to `Array.prototype`:
 
 * `print`: print a cube (or a standard array)
 
@@ -14,8 +12,9 @@ These methods return a `<div>` containing the printed cube/array. Typically, we 
 
 **Notes:**
 
-* The package exports a function that can be used to change how entries, indices, keys and labels are formatted &mdash; see [Format](#format). When a `<script>` tag is used to load the package, the exported function is assigned to the global variable `setFormat`.
+* The module exports a function that can be used to change how entries, indices, keys and labels are formatted &mdash; see [Format](#format). When a `<script>` tag is used to load the module, the exported function is assigned to the global variable `setFormat`. See the [Data-Cube plugins page](https://gjmcn.github.io/data-cube/index.html?plugins) for further usage instructions.
 
+* There are example styles in `docs/styles`. Using one of these is an easy way to get started (though the styles are currently rather minimal so be wary of other CSS leaking in).
 
 * `print` will generate the same HTML for the standard array `[5,6,7]` and the vector `[5,6,7].toCube()`. However, `print` and `info` do *not* convert a standard array to a cube like core Data-Cube methods do.
 
@@ -68,10 +67,10 @@ The `<div>` returned by `info` also has the `data-cube-wrap` class. The `<table>
 
 <h2 name="format" href="#format">Format</h2>
 
-Every printed entry, index, key and label is passed through a 'format function'. This package exports a single function that can be used to alter the default format functions. For example:
+Every printed entry, index, key and label is passed through a 'format function'. This module exports a single function that can be used to alter the default format functions. For example:
 
 ```js
-//if the package is loaded in a <script> tag, the
+//if the module is loaded in a <script> tag, the
 //exported function is the global variable setFormat
 setFormat({
   number: x => '$' + Math.round(x),        //print numbers as dollars

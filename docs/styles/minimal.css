@@ -6,9 +6,20 @@
 
 .data-cube-wrap .page-table,
 .data-cube-wrap .info-table {
-  margin: 15px 10px;
   border-collapse: collapse;
   border-style: none;
+}
+
+.data-cube-wrap .page-table {
+  margin: 15px 0;
+}
+
+.data-cube-wrap .page-table:first-child {
+  margin-top: 0;
+}
+
+.data-cube-wrap .page-table:last-child {
+  margin-bottom: 0;
 }
 
 .data-cube-wrap caption {

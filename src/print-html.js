@@ -1,4 +1,5 @@
-{
+(() => {
+  
   'use strict';
   
   const {addArrayMethod, polarize, assert, dimName, def} = Array.prototype._helper;
@@ -47,8 +48,8 @@
     undefined: x => 'undefined',
     function: x => 'function',
     null: x => 'null',
-    cube: x => 'cube (entries: ' + x.length + ', shape: ' + x._s.join(', ') + ')',
-    array: x => 'array (entries: ' + x.length + ')',
+    cube: x => 'cube (shape: ' + x._s.join(', ') + ')',
+    array: x => 'array (length: ' + x.length + ')',
     date: x => ('' + x).replace(/\s*\([^\)]*\)/, ''),
     other: basicStrFmt,
     rowIndex:  x => x,
@@ -259,11 +260,19 @@
       const labels = [];
       if (this._k) this._k.forEach((a,i) => a ?   keys.push(dimName[i]) : 0);
       if (this._l) this._l.forEach((a,i) => a ? labels.push(dimName[i]) : 0);
+      const before = this._b
+        ? (this._b.length === 1 ? '1 function' : this._b.length + ' functions')
+        : '(none)';
+      const after = this._a
+        ? (this._a.length === 1 ? '1 function' : this._a.length + ' functions')
+        : '(none)';
       str +=
         `<tr><td>entries:</td><td>${this.length}</td></tr>
          <tr><td>shape:</td><td>${this._s.join(', ')}</td></tr>
          <tr><td>keys:</td><td>${keys.length ? keys.join(', ') : '(none)'}</td></tr>
          <tr><td>labels:</td><td>${labels.length ? labels.join(', ') : '(none)'}</td></tr>
+         <tr><td>before:</td><td>${before}</td></tr>
+         <tr><td>after:</td><td>${after}</td></tr>
          </table>`;
     }
     else {
@@ -289,4 +298,4 @@
     }
   };
 
-}
+})();

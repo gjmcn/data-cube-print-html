@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8"/>
+  <title>Examples</title>
+  <link href="styles/basic-color.css" rel="stylesheet"/>
+  <script src="https://unpkg.com/@gjmcn/data-cube@0.2"></script>
+  <script src="https://unpkg.com/@gjmcn/data-cube-html@0.2"></script>
+  <script src="https://unpkg.com/@gjmcn/data-cube-print-html@0.2"></script>
+</head>
+
+<body>
+
+  <script>
+    
+    const body = qa('body').$style('margin', '20px'),
+          div = () => body.insert('div').$style('margin-bottom', '40px'),
+          para = txt => body.insert('p').$prop('textContent', txt);
+  
+    para('Standard array:');
+    [7,8,9].print({to: div()});
+
+    para('Standard array, info:');
+    [7,8,9].info({to: div()});
+
+    para('Vector:');
+    [7,8,9].toCube().print({to: div()});
+  
+    para('Vector, info:');
+    [7,8,9].toCube().info({to: div()});
+  
+    para('Matrix:');
+    [4,6].rand().print({to: div()});
+
+    para('3 pages:');
+    [3,2,3].rand().print({ to: div() });
+
+    para('3 pages, no indices:');
+    [3,2,3].rand().print({ to: div(), indexKey: false });
+
+    para('Exam results:');
+    const x = [3,4,2].rand(100)
+      .$key(0, ['Alice','Bob','Cath'])
+      .$key(1, ['math','biol','chem','phys'])
+      .$key(2, ['Autumn','Spring'])
+      .$label(0, 'Student')
+      .$label(1, 'Subject')
+      .$label(2, 'Term');
+    x.print({to: div()});
+
+    para('Exam results info:');
+    x.info({to: div()});
+
+    para('No keys, no labels:');
+    x.print({ to: div(), label: false, indexKey: false });
+    
+    para('Keys, no labels:');
+    x.print({ to: div(), label: false });
+  
+    para('Labels, no keys:');
+    x.print({ to: div(), indexKey: false });
+  
+    para('Single column and page:');
+    x.subcube(null, 'chem', 'Spring').print({to: div()});
+  
+    para('Single row and page:');
+    x.subcube('Cath', null, 'Spring').print({to: div()});
+  
+    para('Single row and column:');
+    x.subcube('Cath', 'chem').print({to: div()});
+  
+    para('Highlight Bob\'s results:');
+    [x.print({ to: div(), entryAttr: true })]
+      .qa('[data-row="Bob"]')
+        .$style('backgroundColor', 'gold');
+  
+    para('Highlight keys of Spring:');
+    [x.print({to: div(), tableAttr: true })]
+      .qa('[data-table="Spring"] .ik')
+        .$style('color', 'red');
+  
+    para('Different types:');
+    const y = [
+      Math.PI,
+      1234.56789,
+      'multiline\nstring',
+      'I am a long string that will be truncated by default formatting',
+      true,
+      undefined,
+      null,
+      new Date(),
+      [4,5],
+      [4,5].toCube(),
+      () => {},
+      /abc/,
+      {a:5, b:6},
+      new Map([ ['a',4], ['b',5] ]),
+      div()[0]
+    ].$shape(5).$label(0, 'row label').$key(0, ['a','b','c','d','e']);
+    y.print({to: div()});
+
+    para(`Format row label, row keys, column indices, string
+          entries, date entries and number of decimal places:`);
+    setFormat({
+      dp: 2,
+      date: d => d.getFullYear(),
+      string: s => s.toUpperCase().slice(0,6),
+      rowLabel: s => s + '!!',
+      rowKey: s => `__${s}__`,
+      colIndex: s => '$' + s
+    });
+    y.print({to: div()});
+  
+  para('Reset formatting to default:');
+  setFormat();
+  y.print({to: div()});
+
+</script>
+
+<br><br><br>
+
+</body>
